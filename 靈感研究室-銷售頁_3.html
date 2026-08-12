@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>靈感研究室｜從收藏款式，到看懂款式</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#241a17;
+    --ink-soft:#5a4b45;
+    --paper:#f6efe3;
+    --paper-deep:#efe4d1;
+    --wine:#7c2e35;
+    --wine-deep:#5c2126;
+    --gold:#a9814a;
+    --sage:#4b5c4f;
+    --indigo:#2c3650;
+    --rosewood:#a65c52;
+    --line:rgba(36,26,23,0.14);
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Noto Sans TC', sans-serif;
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Noto Serif TC', serif;
+    font-weight:900;
+    line-height:1.4;
+    margin:0;
+  }
+  p{margin:0;}
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-size:13px;
+    letter-spacing:.16em;
+    color:var(--wine);
+    font-weight:700;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;
+    height:1px;
+    background:var(--wine);
+    display:inline-block;
+  }
+  .eyebrow.light{color:#e7c98f;}
+  .eyebrow.light::before{background:#e7c98f;}
+
+  /* swatch dots — signature motif */
+  .swatch{border-radius:50%;display:inline-block;}
+  .s-wine{background:var(--wine);}
+  .s-gold{background:var(--gold);}
+  .s-sage{background:var(--sage);}
+  .s-indigo{background:var(--indigo);}
+  .s-rosewood{background:var(--rosewood);}
+
+  .swatch-divider{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:9px;
+    padding:44px 0;
+  }
+  .swatch-divider .swatch{width:8px;height:8px;}
+  .swatch-divider .rule{width:64px;height:1px;background:var(--line);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:96px 0 64px;
+    overflow:hidden;
+  }
+  .hero-scatter{
+    position:absolute;
+    top:0; right:-40px;
+    width:280px; height:280px;
+    pointer-events:none;
+  }
+  .hero-scatter .swatch{position:absolute;}
+  .hero h1{
+    font-size:clamp(30px,5vw,46px);
+    max-width:11.5em;
+    letter-spacing:.01em;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--wine);
+    border-bottom:3px solid var(--gold);
+  }
+  .hero .sub{
+    margin-top:26px;
+    max-width:560px;
+    font-size:17px;
+    color:var(--ink-soft);
+  }
+  .cta-row{
+    margin-top:38px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block;
+    background:var(--wine);
+    color:#f6efe3;
+    font-weight:700;
+    font-size:16px;
+    padding:16px 34px;
+    border-radius:var(--radius);
+    text-decoration:none;
+    border:1px solid var(--wine);
+    transition:transform .15s ease, background .15s ease;
+    letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--wine-deep); transform:translateY(-1px);}
+  .btn.ghost{
+    background:transparent;
+    color:var(--wine);
+  }
+  .micro{
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .micro strong{color:var(--ink);}
+
+  /* ---------- SECTION 2 reframe ---------- */
+  .reframe{padding:20px 0 10px;}
+  .reframe h2{font-size:clamp(24px,3.4vw,32px); max-width:11em;}
+  .reframe .body{
+    margin-top:20px;
+    max-width:620px;
+    font-size:16px;
+    color:var(--ink-soft);
+  }
+  .chip-row{
+    margin-top:32px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .chip{
+    border:1px solid var(--line);
+    padding:10px 16px;
+    font-size:14px;
+    border-radius:999px;
+    color:var(--ink-soft);
+    background:#fff9ee;
+  }
+
+  /* ---------- SECTION 3 breakdown flow (dark) ---------- */
+  .flow-section{
+    background:var(--wine-deep);
+    color:#f3e6d8;
+    padding:72px 0 80px;
+    margin-top:56px;
+  }
+  .flow-section h2{
+    color:#fff;
+    font-size:clamp(24px,3.4vw,32px);
+    max-width:11em;
+  }
+  .flow-nodes{
+    margin-top:44px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    align-items:center;
+  }
+  .flow-node{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    width:120px;
+  }
+  .flow-node .dot{
+    width:12px;height:12px;
+    border-radius:50%;
+    background:#e7c98f;
+    margin-bottom:12px;
+  }
+  .flow-node .label{
+    font-size:13.5px;
+    font-weight:600;
+    letter-spacing:.02em;
+  }
+  .flow-arrow{
+    flex:1 0 20px;
+    min-width:20px;
+    height:1px;
+    background:rgba(231,201,143,0.4);
+    margin:0 4px 26px;
+  }
+  .flow-caption{
+    margin-top:40px;
+    font-family:'Noto Serif TC', serif;
+    font-weight:700;
+    font-size:19px;
+    color:#f3e6d8;
+    max-width:26em;
+  }
+
+  /* ---------- SECTION 4 pull quote ---------- */
+  .pullquote{
+    padding:76px 0;
+  }
+  .pullquote blockquote{
+    margin:0;
+    padding-left:26px;
+    border-left:3px solid var(--gold);
+    font-family:'Noto Serif TC', serif;
+    font-weight:700;
+    font-size:clamp(19px,2.6vw,24px);
+    line-height:1.75;
+    max-width:680px;
+    color:var(--ink);
+  }
+  .pullquote cite{
+    display:block;
+    margin-top:20px;
+    font-style:normal;
+    font-size:13px;
+    letter-spacing:.1em;
+    color:var(--ink-soft);
+    padding-left:29px;
+  }
+
+  /* ---------- SECTION 5 before/after ---------- */
+  .transform{padding:10px 0 20px;}
+  .transform h2{font-size:clamp(24px,3.4vw,32px); max-width:12em;}
+  .ba-grid{
+    margin-top:40px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:26px;
+  }
+  .ba-card{
+    border:1px solid var(--line);
+    padding:30px 26px;
+    background:#fff9ee;
+  }
+  .ba-card.after{
+    background:var(--paper-deep);
+    border-color:var(--gold);
+  }
+  .ba-title{
+    font-size:13px;
+    letter-spacing:.14em;
+    font-weight:700;
+    color:var(--ink-soft);
+    margin-bottom:18px;
+  }
+  .ba-card.after .ba-title{color:var(--wine);}
+  .ba-steps{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    font-size:14.5px;
+    color:var(--ink);
+  }
+  .ba-steps span.arrow{color:var(--ink-soft); font-size:12px;}
+  .ba-dots{
+    display:flex;
+    gap:6px;
+    margin-top:22px;
+  }
+  .ba-dots .swatch{width:10px;height:10px;}
+  .ba-card:not(.after) .ba-dots .swatch:nth-child(1){transform:translateY(4px);}
+  .ba-card:not(.after) .ba-dots .swatch:nth-child(3){transform:translateY(-3px);}
+  .ba-card:not(.after) .ba-dots .swatch:nth-child(4){transform:translateY(2px);}
+
+  /* ---------- SECTION 6 includes ---------- */
+  .includes{padding:20px 0;}
+  .includes h2{font-size:clamp(24px,3.4vw,32px); max-width:10em;}
+  .card-grid{
+    margin-top:36px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .card{
+    background:var(--paper);
+    padding:28px 26px;
+  }
+  .card .num{
+    font-family:'Noto Serif TC', serif;
+    font-weight:700;
+    font-size:13px;
+    color:var(--gold);
+    letter-spacing:.1em;
+    margin-bottom:10px;
+    display:block;
+  }
+  .card h3{
+    font-size:17px;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .card p{
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- SECTION 7 testimonials ---------- */
+  .testimonials{padding:32px 0;}
+  .testi-note{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-bottom:26px;
+    border:1px dashed var(--line);
+    padding:10px 14px;
+    display:inline-block;
+  }
+  .testi-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+  }
+  .testi{
+    padding:24px 20px;
+    background:#fff9ee;
+    border-left:3px solid var(--sage);
+    font-size:14.5px;
+  }
+  .testi:nth-child(2){border-color:var(--indigo);}
+  .testi:nth-child(3){border-color:var(--rosewood);}
+  .testi p{color:var(--ink);}
+  .testi .who{
+    margin-top:14px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    letter-spacing:.04em;
+  }
+
+  /* ---------- SECTION 8 for/not-for ---------- */
+  .forwho{padding:56px 0 20px;}
+  .forwho h2{font-size:clamp(24px,3.4vw,32px);}
+  .fw-grid{
+    margin-top:34px;
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:26px;
+  }
+  .fw-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px;}
+  .fw-list li{
+    display:flex;
+    gap:12px;
+    font-size:15px;
+    align-items:flex-start;
+  }
+  .fw-list.yes li::before{content:"✓"; color:var(--sage); font-weight:700;}
+  .fw-not{
+    border:1px solid var(--line);
+    padding:22px;
+    font-size:14px;
+    color:var(--ink-soft);
+    background:var(--paper-deep);
+  }
+  .fw-not .ba-title{margin-bottom:12px;}
+
+  /* ---------- SECTION 9 price / faq ---------- */
+  .price-section{
+    background:var(--ink);
+    color:var(--paper);
+    padding:76px 0;
+    margin-top:56px;
+  }
+  .price-card{
+    text-align:center;
+    max-width:460px;
+    margin:0 auto;
+  }
+  .price-card .eyebrow{color:#e7c98f; justify-content:center;}
+  .price-card .eyebrow::before{background:#e7c98f;}
+  .price-amount{
+    font-family:'Noto Serif TC', serif;
+    font-weight:900;
+    font-size:56px;
+    color:#fff;
+  }
+  .price-amount span{
+    font-size:18px;
+    font-weight:500;
+    color:#cbb99a;
+  }
+  .price-note{
+    margin-top:16px;
+    font-size:14.5px;
+    color:#cbb99a;
+    line-height:1.8;
+  }
+  .price-card .btn{
+    margin-top:30px;
+    background:#e7c98f;
+    border-color:#e7c98f;
+    color:var(--wine-deep);
+  }
+  .price-card .btn:hover{background:#f3ddad;}
+  .price-card .micro{color:#a99a84; margin-top:14px;}
+
+  .faq{max-width:640px; margin:64px auto 0;}
+  .faq details{
+    border-top:1px solid rgba(246,239,227,0.16);
+    padding:18px 0;
+  }
+  .faq details:last-child{border-bottom:1px solid rgba(246,239,227,0.16);}
+  .faq summary{
+    cursor:pointer;
+    font-weight:600;
+    font-size:15px;
+    color:#f3e6d8;
+    list-style:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:"+"; color:#e7c98f; font-size:18px;}
+  .faq details[open] summary::after{content:"–";}
+  .faq .a{
+    margin-top:12px;
+    font-size:14px;
+    color:#cbb99a;
+    line-height:1.8;
+  }
+
+  /* final cta */
+  .final-cta{
+    text-align:center;
+    padding:88px 0 120px;
+  }
+  .final-cta h2{
+    font-size:clamp(24px,3.6vw,34px);
+    max-width:12em;
+    margin:0 auto;
+  }
+  .final-cta .btn{margin-top:30px;}
+
+  /* sticky mobile bar */
+  .sticky-bar{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    background:var(--wine-deep);
+    color:#f6efe3;
+    padding:14px 20px;
+    display:none;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    z-index:50;
+    transform:translateY(100%);
+    transition:transform .25s ease;
+  }
+  .sticky-bar.show{transform:translateY(0);}
+  .sticky-bar .price{font-size:14px; font-weight:700;}
+  .sticky-bar .price span{display:block; font-size:11px; font-weight:400; color:#e0c8a8;}
+  .sticky-bar a.btn{
+    padding:10px 20px;
+    font-size:14px;
+    background:#e7c98f;
+    border-color:#e7c98f;
+    color:var(--wine-deep);
+  }
+
+  footer{
+    text-align:center;
+    font-size:12px;
+    color:var(--ink-soft);
+    padding:30px 0 90px;
+  }
+
+  @media (max-width:760px){
+    body{font-size:16px; padding-bottom:76px;}
+    .wrap{padding:0 20px;}
+
+    /* stack all grids to single column */
+    .ba-grid, .fw-grid, .testi-grid{grid-template-columns:1fr;}
+    .card-grid{grid-template-columns:1fr;}
+    .testi-grid{gap:14px;}
+    .ba-grid{gap:16px;}
+
+    /* hero */
+    .hero{padding:56px 0 40px;}
+    .hero-scatter{display:none;}
+    .hero h1{font-size:28px; letter-spacing:0;}
+    .hero .sub{font-size:16px; margin-top:20px;}
+    .cta-row{margin-top:28px; flex-direction:column; align-items:stretch; gap:14px;}
+    .cta-row .micro{text-align:center;}
+
+    /* buttons: full width, easy to tap */
+    .btn{
+      display:block;
+      width:100%;
+      text-align:center;
+      padding:16px 20px;
+      font-size:16px;
+    }
+
+    /* section rhythm — shorter but still legible */
+    .reframe{padding:12px 0 4px;}
+    .reframe h2, .transform h2, .includes h2, .forwho h2{font-size:24px;}
+    .reframe .body{font-size:15.5px; margin-top:16px;}
+    .chip-row{gap:8px; margin-top:24px;}
+    .chip{font-size:13.5px; padding:9px 14px;}
+
+    .flow-section{padding:52px 0 56px; margin-top:36px;}
+    .flow-section h2{font-size:24px;}
+    .flow-nodes{flex-direction:column; align-items:flex-start; gap:20px; margin-top:32px;}
+    .flow-arrow{display:none;}
+    .flow-node{width:auto; align-items:flex-start; text-align:left; flex-direction:row; gap:12px;}
+    .flow-node .dot{margin-bottom:0; flex-shrink:0; margin-top:4px;}
+    .flow-node .label{font-size:15px;}
+    .flow-caption{font-size:17px; margin-top:32px;}
+
+    .pullquote{padding:52px 0;}
+    .pullquote blockquote{font-size:18px; padding-left:18px;}
+
+    .transform{padding:6px 0 12px;}
+    .ba-card{padding:22px 20px;}
+    .ba-steps{font-size:15px; gap:8px;}
+    .ba-title{font-size:12.5px;}
+
+    .includes{padding:12px 0;}
+    .card{padding:22px 20px;}
+    .card h3{font-size:16px;}
+    .card p{font-size:14.5px;}
+
+    .testimonials{padding:24px 0;}
+    .testi{padding:20px 18px; font-size:15px;}
+
+    .forwho{padding:44px 0 12px;}
+    .fw-list li{font-size:15px;}
+    .fw-not{font-size:14.5px; padding:18px;}
+
+    .price-section{padding:56px 0; margin-top:40px;}
+    .price-amount{font-size:44px;}
+    .price-note{font-size:14.5px;}
+    .faq{margin-top:44px;}
+    .faq summary{font-size:15.5px;}
+    .faq .a{font-size:14.5px;}
+
+    .final-cta{padding:60px 0 80px;}
+    .final-cta h2{font-size:22px;}
+
+    /* sticky mobile CTA bar */
+    .sticky-bar{
+      display:flex;
+      padding:12px 16px;
+      padding-bottom:calc(12px + env(safe-area-inset-bottom));
+    }
+    .sticky-bar a.btn{width:auto; padding:11px 22px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-scatter" aria-hidden="true">
+    <span class="swatch s-wine" style="width:26px;height:26px;top:10px;left:120px;"></span>
+    <span class="swatch s-gold" style="width:16px;height:16px;top:70px;left:60px;"></span>
+    <span class="swatch s-sage" style="width:34px;height:34px;top:130px;left:160px;"></span>
+    <span class="swatch s-indigo" style="width:14px;height:14px;top:40px;left:210px;"></span>
+    <span class="swatch s-rosewood" style="width:20px;height:20px;top:190px;left:90px;"></span>
+  </div>
+  <div class="wrap">
+    <div class="eyebrow">靈感研究室 · 美甲設計會員制</div>
+    <h1>收藏了幾百張美甲款式，<br>輪到自己設計，卻還是<em>卡住</em>？</h1>
+    <p class="sub">《靈感研究室》不是給妳更多能照著做的款式，而是陪妳看懂——一個款式，究竟是怎麼被設計出來的。</p>
+    <div class="cta-row">
+      <a href="https://www.skool.com/123-9057/about" target="_blank" rel="noopener" class="btn">立即加入研究室</a>
+      <span class="micro"><strong>US$49／月</strong>・月訂制・可隨時取消</span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="swatch-divider">
+    <span class="rule"></span>
+    <span class="swatch s-wine" style="width:7px;height:7px;"></span>
+    <span class="swatch s-gold" style="width:7px;height:7px;"></span>
+    <span class="swatch s-sage" style="width:7px;height:7px;"></span>
+    <span class="rule"></span>
+  </div>
+</div>
+
+<!-- REFRAME -->
+<section class="reframe">
+  <div class="wrap">
+    <div class="eyebrow">真正卡住的地方</div>
+    <h2>妳缺的不是靈感，<br>是拆解的方法</h2>
+    <p class="body">真正卡住的，通常不是妳看得不夠多，而是沒有人告訴妳，一個款式到底怎麼被拆開——配色、元素、留白、材料，是怎麼一層一層疊上去的。</p>
+    <div class="chip-row">
+      <span class="chip">收藏很多款式，卻不知從何開始</span>
+      <span class="chip">客人指定款式，當場卡住</span>
+      <span class="chip">材料買了一堆，不知道怎麼搭</span>
+      <span class="chip">暈染總覺得哪裡怪，卻說不出原因</span>
+    </div>
+  </div>
+</section>
+
+<!-- BREAKDOWN FLOW (signature, dark) -->
+<section class="flow-section">
+  <div class="wrap">
+    <div class="eyebrow light">我們怎麼拆一個款式</div>
+    <h2>從成品，回推到<br>每一個設計決定</h2>
+    <div class="flow-nodes">
+      <div class="flow-node"><span class="dot"></span><span class="label">原始成品</span></div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node"><span class="dot"></span><span class="label">配色拆解</span></div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node"><span class="dot"></span><span class="label">元素拆解</span></div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node"><span class="dot"></span><span class="label">材料應用</span></div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node"><span class="dot"></span><span class="label">操作片段</span></div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node"><span class="dot"></span><span class="label">延伸設計</span></div>
+    </div>
+    <p class="flow-caption">不是只告訴妳這款怎麼做，而是讓妳知道它為什麼這樣做。</p>
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<section class="pullquote">
+  <div class="wrap">
+    <blockquote>
+      「為什麼這裡要留白、為什麼這裡不能再加元素、為什麼兩個差不多的顏色，質感最後完全不同——我們拆給妳看。」
+      <cite>研究室的教學方式</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section class="transform">
+  <div class="wrap">
+    <div class="eyebrow">加入之後</div>
+    <h2>不只是看得懂拆解，<br>而是久而久之，長出自己的設計能力</h2>
+    <p class="body" style="margin-top:16px;">每一次拆解都是一次累積。慢慢的，妳不再需要照著誰的款式做，而是有一套屬於自己的設計邏輯，甚至自己的風格。</p>
+    <div class="ba-grid">
+      <div class="ba-card">
+        <div class="ba-title">現在</div>
+        <div class="ba-steps">
+          <div>看到漂亮款式</div>
+          <span class="arrow">↓</span>
+          <div>收藏</div>
+          <span class="arrow">↓</span>
+          <div>找材料</div>
+          <span class="arrow">↓</span>
+          <div>模仿</div>
+          <span class="arrow">↓</span>
+          <div>下一款又重新卡住</div>
+        </div>
+        <div class="ba-dots">
+          <span class="swatch s-wine" style="width:10px;height:10px;"></span>
+          <span class="swatch s-gold" style="width:8px;height:8px;"></span>
+          <span class="swatch s-sage" style="width:11px;height:11px;"></span>
+          <span class="swatch s-indigo" style="width:7px;height:7px;"></span>
+        </div>
+      </div>
+      <div class="ba-card after">
+        <div class="ba-title">加入研究室之後</div>
+        <div class="ba-steps">
+          <div>看到漂亮款式</div>
+          <span class="arrow">↓</span>
+          <div>看配色・看元素・看層次</div>
+          <span class="arrow">↓</span>
+          <div>判斷材料</div>
+          <span class="arrow">↓</span>
+          <div>拆解、重組</div>
+          <span class="arrow">↓</span>
+          <div>累積成自己的設計邏輯</div>
+          <span class="arrow">↓</span>
+          <div><strong>長出屬於自己的風格</strong></div>
+        </div>
+        <div class="ba-dots">
+          <span class="swatch s-wine" style="width:9px;height:9px;"></span>
+          <span class="swatch s-gold" style="width:9px;height:9px;"></span>
+          <span class="swatch s-sage" style="width:9px;height:9px;"></span>
+          <span class="swatch s-indigo" style="width:9px;height:9px;"></span>
+          <span class="swatch s-rosewood" style="width:9px;height:9px;"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="swatch-divider">
+    <span class="rule"></span>
+    <span class="swatch s-indigo" style="width:7px;height:7px;"></span>
+    <span class="swatch s-rosewood" style="width:7px;height:7px;"></span>
+    <span class="swatch s-gold" style="width:7px;height:7px;"></span>
+    <span class="rule"></span>
+  </div>
+</div>
+
+<!-- INCLUDES -->
+<section class="includes">
+  <div class="wrap">
+    <div class="eyebrow">研究室裡有什麼</div>
+    <h2>妳每個月會得到</h2>
+    <div class="card-grid">
+      <div class="card">
+        <span class="num">01</span>
+        <h3>4–6 支款式拆解影片</h3>
+        <p>配色、元素、材料、操作，一次拆開講清楚，不只是示範。</p>
+      </div>
+      <div class="card">
+        <span class="num">02</span>
+        <h3>每月直播</h3>
+        <p>現場示範、即時提問，把卡住的地方當場拆給妳看。</p>
+      </div>
+      <div class="card">
+        <span class="num">03</span>
+        <h3>材料應用圖鑑</h3>
+        <p>把材料整理成看得懂的圖鑑，不只教怎麼做，也教怎麼選、怎麼搭配。</p>
+      </div>
+      <div class="card">
+        <span class="num">04</span>
+        <h3>月訂彈性</h3>
+        <p>不綁約、不用一次買一整年，隨時可以取消。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="wrap">
+    <div class="eyebrow">會員怎麼說</div>
+    <div class="testi-grid">
+      <div class="testi">
+        <p>「以前靈感圖都堆在相簿裡生灰，現在會從一張喜歡的圖開始拆解元素，設計成自己的風格，變成真正的作品。」</p>
+        <div class="who">研究室會員</div>
+      </div>
+      <div class="testi">
+        <p>「刷圖存了一堆，以前都只是收藏吃灰，現在越來越抓得到圖片裡的精髓，能把它們變現成漂亮的作品。」</p>
+        <div class="who">研究室會員</div>
+      </div>
+      <div class="testi">
+        <p>「上過其他款式課都只會照抄，不會變通。聽完直播後對配色搭配比較有概念，思路比上課前清楚很多，很充實。」</p>
+        <div class="who">研究室會員</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="forwho">
+  <div class="wrap">
+    <div class="eyebrow">適合誰</div>
+    <h2>研究室適合妳，如果——</h2>
+    <div class="fw-grid">
+      <ul class="fw-list yes">
+        <li>已經會基本操作，但設計常常卡住</li>
+        <li>收藏很多款式，卻不知道如何轉化成自己的設計</li>
+        <li>想理解材料、元素與配色怎麼搭配</li>
+        <li>想慢慢形成自己的設計判斷，而不只是模仿</li>
+      </ul>
+      <div class="fw-not">
+        <div class="ba-title">先不建議</div>
+        <p>如果妳目前是想找完整的基礎美甲技術課程，這裡可能不是最適合妳的起點。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE + FAQ -->
+<section class="price-section" id="price">
+  <div class="wrap">
+    <div class="price-card">
+      <div class="eyebrow">加入研究室</div>
+      <div class="price-amount">US$49<span> ／月</span></div>
+      <p class="price-note">每月持續更新研究室內容。不用一次購買整年課程，月訂制可依自己的學習需求，決定是否續訂。</p>
+      <a href="https://www.skool.com/123-9057/about" target="_blank" rel="noopener" class="btn">立即加入研究室</a>
+      <p class="micro">可隨時取消・取消後不再扣款</p>
+    </div>
+
+    <div class="faq">
+      <details>
+        <summary>可以隨時取消嗎？</summary>
+        <p class="a">可以。月訂制，取消後不會再扣款。</p>
+      </details>
+      <details>
+        <summary>加入後可以看到哪些內容？</summary>
+        <p class="a">每月新增的款式拆解影片、直播紀錄與材料應用建議，都會在研究室裡持續更新。</p>
+      </details>
+      <details>
+        <summary>完全新手適合嗎？</summary>
+        <p class="a">研究室內容假設妳已經具備基本操作能力，比較適合想加強設計與拆解能力的美甲師。</p>
+      </details>
+      <details>
+        <summary>內容多久更新一次？</summary>
+        <p class="a">每月固定更新 4–6 支款式拆解影片，加上每月一場直播。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="wrap">
+    <h2>先加入一個月，看看研究室怎麼拆款式。</h2>
+    <a href="https://www.skool.com/123-9057/about" target="_blank" rel="noopener" class="btn">立即加入研究室</a>
+  </div>
+</section>
+
+<footer>© 靈感研究室 Inspiration Lab</footer>
+
+<!-- sticky mobile CTA -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="price">US$49／月<span>可隨時取消</span></div>
+  <a href="https://www.skool.com/123-9057/about" target="_blank" rel="noopener" class="btn">立即加入</a>
+</div>
+
+<script>
+  const bar = document.getElementById('stickyBar');
+  const hero = document.querySelector('.hero');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting){ bar.classList.add('show'); }
+      else { bar.classList.remove('show'); }
+    });
+  }, {threshold:0});
+  io.observe(hero);
+</script>
+
+</body>
+</html>
